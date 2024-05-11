@@ -1,4 +1,4 @@
-## Technical Challenge: Document Analysis Application
+## Technical Challenge: LLM Recipt Analysis App
 
 ### Overview
 Welcome to the technical challenge for the engineering positions at InferSoft. We're excited about your interest in helping us develop cutting-edge document analysis solutions using large language models (LLMs) and vector databases. The purpose of this challenge is to assess your skills in building a basic version of the application we are developing.
