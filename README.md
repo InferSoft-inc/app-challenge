@@ -21,7 +21,7 @@ We've included a collection of scanned recipts. Your task is to create an applic
 2. **Text Processing**: Implement functionality to preprocess the uploaded documents into a suitable format for analysis (e.g., tokenization, removing special characters). This should include OCR for scanned documents.
 3. **Vector Embedding**: Utilize a LLM to generate embeddings for the preprocessed text, and store these embeddings in a vector database.
 4. **Query System**: Develop a simple query interface where users can enter questions and retrieve answers. The system should use the vector database to find the most relevant document embeddings and use the LLM to generate answers based on these documents.
-5. **Display Results**: The system should display the relevant document snippets alongside the answers to the user’s questions.
+5. **Display Results**: The system should display the answers to the user’s questions.
 
 ### Suggested Technologies (use whatever you want)
 - **Frontend**: HTML/CSS/JavaScript (Optional: React or Angular)
