@@ -1,10 +1,15 @@
 ## Technical Challenge: Document Analysis Application
 
 ### Overview
-Welcome to the technical challenge for the engineering position at our startup. We're excited about your interest in helping us develop cutting-edge document analysis solutions using large language models (LLMs) and vector databases. The purpose of this challenge is to assess your skills in building a basic version of the application we are developing.
+Welcome to the technical challenge for the engineering positions at InferSoft. We're excited about your interest in helping us develop cutting-edge document analysis solutions using large language models (LLMs) and vector databases. The purpose of this challenge is to assess your skills in building a basic version of the application we are developing.
 
 ### Challenge Description
 Your task is to create a small application where a user can upload multiple text documents, and then query these documents to retrieve relevant information based on their questions. The application should leverage a LLM for understanding and answering questions and a vector database to store and retrieve document embeddings efficiently.
+
+For convenience, we've included a set of scanned PDF documents  in this repo you will find a collection of scanned PDF documents describing the details of a land lease agreement between a land holder and a producer. Your task is to create an application where users can upload the documents and then retrieve relevent information based on a series of users query prompts included below:
+
+- List the documents by creation date, Create a table with Doc name, date created and individuals who signed (bonus to seperate out the lessee and lessor!)
+- Create a table of all the key values XX
 
 ### Objectives
 1. **Document Upload Interface**: Create a basic web interface that allows users to upload and store multiple text documents.
@@ -13,11 +18,11 @@ Your task is to create a small application where a user can upload multiple text
 4. **Query System**: Develop a simple query interface where users can enter questions and retrieve answers. The system should use the vector database to find the most relevant document embeddings and use the LLM to generate answers based on these documents.
 5. **Display Results**: The system should display the relevant document snippets alongside the answers to the user’s questions.
 
-### Technologies
+### Suggested Technologies (use whatever you want)
 - **Frontend**: HTML/CSS/JavaScript (Optional: React or Angular)
-- **Backend**: Python (Flask or FastAPI)
+- **Backend**: Python (Flask or FastAPI), 
 - **LLM Integration**: You can use the Hugging Face Transformers library to integrate a pre-trained model like BERT or GPT.
-- **Vector Database**: Use Faiss, Annoy, or similar for efficient similarity search in high-dimensional spaces.
+- **Vector Database**: Mongo, Faiss, Annoy, or similar for efficient similarity search in high-dimensional spaces.
 
 ### Deliverables
 - Source code hosted on a public GitHub repository.
@@ -25,7 +30,7 @@ Your task is to create a small application where a user can upload multiple text
   - How to set up and run your application.
   - A brief explanation of your design choices and technologies used.
   - Any challenges you encountered and how you resolved them.
-- A simple demo (video or live) showcasing the functionality of your application.
+- A simple demo (video) showcasing the functionality of your application.
 
 ### Evaluation Criteria
 - **Functionality**: The application meets all the basic functional requirements.
@@ -34,9 +39,9 @@ Your task is to create a small application where a user can upload multiple text
 - **Performance**: Efficiency of the queries and responsiveness of the system.
 
 ### Time Frame
-You should aim to complete this challenge within 4 hours. This is intended to be a proof of concept that demonstrates your skills and approach to problem-solving in a condensed timeframe.
+You should aim to complete this challenge within 3-4 hours. This is intended to be a proof of concept that demonstrates your skills and approach to problem-solving in a condensed timeframe.
 
-Good luck! We look forward to seeing your innovative solutions and discussing your approach during your interview.
+We will review your submission and get back to you soon!
 
 # app-challenge-24
 
@@ -76,4 +81,4 @@ Submission Guidelines:
   1) a screenshare walk through of you using the tool to answer some of the queries
   2) A README file describing how we can test your code
   3) The answers to the provided queries below (screenshot is fine)
-- We will review your submission and get back to you soon!
+- 
