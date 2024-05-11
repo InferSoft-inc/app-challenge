@@ -1,7 +1,7 @@
 ## Technical Challenge: LLM Recipt Analysis App
 
 ### Overview
-Welcome to the technical challenge for the engineering positions at InferSoft. We're excited about your interest in helping us develop cutting-edge document analysis solutions using large language models (LLMs) and vector databases. The purpose of this challenge is to assess your skills in building a basic version of the application we are developing.
+Welcome to the technical challenge for engineering positions at InferSoft. We're excited about your interest in helping us develop cutting-edge document analysis solutions using large language models (LLMs) and vector databases. The purpose of this challenge is to assess your skills in building a basic version of the application we are developing.
 
 ### Challenge Description
 Your task is to create a small application where a user can upload multiple text documents, and then query these documents to retrieve relevant information based on their questions. The application should leverage a LLM for understanding and answering questions and a vector database to store and retrieve document embeddings efficiently.
@@ -11,18 +11,18 @@ We've included a collection of scanned recipts. Your task is to create an applic
   - "List all the vendors and the total amount spent per vendor across all documents"
   - "Identify all instances where transportation costs exceeded $100 in any single transaction across all countries. Create a table with the document name, date and amount spent"
   - "Calculate the total expenditure on dining out during holiday seasons (December-January) for the years 2018 through 2022, including a breakdown by type of cuisine and country."
-  - "Suggest where spending can be reduced without changing the trips itinerary (ie cheaper hotels, restaurants, etc)." (Note this should utilize the LLMs reasoning capabilities)
+  - "Suggest where spending can be reduced without changing the trips itinerary (ie cheaper hotels, restaurants, etc)."
 
 ### Objectives
-1. **Document Upload Interface**: Create a basic web interface that allows users to upload, perform OCR and store multiple text documents. Use a datastructure (ie json) to store the text and metadata of the documents.
-2. **Text Processing**: Implement functionality to preprocess the uploaded documents into a suitable format for analysis (e.g., tokenization, removing special characters).
+1. **Document Upload Interface**: Create a basic web interface that allows users to upload and store the documents. 
+2. **Text Processing**: Implement functionality to preprocess the uploaded documents into a suitable format for analysis (e.g., tokenization, removing special characters).This should include OCR for scanned documents.
 3. **Vector Embedding**: Utilize a LLM to generate embeddings for the preprocessed text, and store these embeddings in a vector database.
 4. **Query System**: Develop a simple query interface where users can enter questions and retrieve answers. The system should use the vector database to find the most relevant document embeddings and use the LLM to generate answers based on these documents.
 5. **Display Results**: The system should display the relevant document snippets alongside the answers to the user’s questions.
 
 ### Suggested Technologies (use whatever you want)
 - **Frontend**: HTML/CSS/JavaScript (Optional: React or Angular)
-- **Backend**: Python (Flask or FastAPI), 
+- **Backend**: Python (Flask or FastAPI), AWS textract for OCR
 - **LLM Integration**: You can use the Hugging Face Transformers library to integrate a pre-trained model like BERT or GPT.
 - **Vector Database**: Mongo, Faiss, Annoy, or similar for efficient similarity search in high-dimensional spaces.
 
