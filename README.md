@@ -6,13 +6,15 @@ Welcome to the technical challenge for the engineering positions at InferSoft. W
 ### Challenge Description
 Your task is to create a small application where a user can upload multiple text documents, and then query these documents to retrieve relevant information based on their questions. The application should leverage a LLM for understanding and answering questions and a vector database to store and retrieve document embeddings efficiently.
 
-For convenience, we've included a set of scanned PDF documents  in this repo you will find a collection of scanned PDF documents describing the details of a land lease agreement between a land holder and a producer. Your task is to create an application where users can upload the documents and then retrieve relevent information based on a series of users query prompts included below:
+We've included a collection of scanned recipts. Your task is to create an application where users can upload the recipts and then retrieve relevent information based on a series of users query prompts included below:
 
-- List the documents by creation date, Create a table with Doc name, date created and individuals who signed (bonus to seperate out the lessee and lessor!)
-- Create a table of all the key values XX
+  - "List all the vendors and the total amount spent per vendor across all documents"
+  - "Identify all instances where transportation costs exceeded $100 in any single transaction across all countries. Create a table with the document name, date and amount spent"
+  - "Calculate the total expenditure on dining out during holiday seasons (December-January) for the years 2018 through 2022, including a breakdown by type of cuisine and country."
+  - "Suggest where spending can be reduced without changing the trips itinerary (ie cheaper hotels, restaurants, etc)." (Note this should utilize the LLMs reasoning capabilities)
 
 ### Objectives
-1. **Document Upload Interface**: Create a basic web interface that allows users to upload and store multiple text documents.
+1. **Document Upload Interface**: Create a basic web interface that allows users to upload, perform OCR and store multiple text documents. Use a datastructure (ie json) to store the text and metadata of the documents.
 2. **Text Processing**: Implement functionality to preprocess the uploaded documents into a suitable format for analysis (e.g., tokenization, removing special characters).
 3. **Vector Embedding**: Utilize a LLM to generate embeddings for the preprocessed text, and store these embeddings in a vector database.
 4. **Query System**: Develop a simple query interface where users can enter questions and retrieve answers. The system should use the vector database to find the most relevant document embeddings and use the LLM to generate answers based on these documents.
@@ -30,7 +32,8 @@ For convenience, we've included a set of scanned PDF documents  in this repo you
   - How to set up and run your application.
   - A brief explanation of your design choices and technologies used.
   - Any challenges you encountered and how you resolved them.
-- A simple demo (video) showcasing the functionality of your application.
+- A simple demo (video) showcasing the functionality of your application answering as many of the queries as you can. If it doesn't work perfectly, that's okay! Include your thoughts on whats going wrong and how you would fix it in the README file.
+
 
 ### Evaluation Criteria
 - **Functionality**: The application meets all the basic functional requirements.
@@ -42,43 +45,3 @@ For convenience, we've included a set of scanned PDF documents  in this repo you
 You should aim to complete this challenge within 3-4 hours. This is intended to be a proof of concept that demonstrates your skills and approach to problem-solving in a condensed timeframe.
 
 We will review your submission and get back to you soon!
-
-# app-challenge-24
-
-We're excited to invite you to take part in the next step - building your own LLM application. The products we're building with our design partners require either previous knowledge or the ability to learn rapidly how to build these systems. This challenge gives candidates the oppertunity to highlight their super powers and how those powers will help our team build the next generation of AI user experience. 
-
-Project Description:
-
-Included in this repo you will find a collection of scanned PDF documents from X. Your task is to create an application where users can upload the documents and then retrieve relevent information based on a series of users query prompts included below:
-
-- List the documents by creation date, Create a table with Doc name, date created and individuals who signed (bonus to seperate out the lessee and lessor!)
-- Create a table of all the key values XX
-
-Additional details: 
-- Time Limit: There's no time limit though we suggest aiming for 2-3 hours of work
-- Areas of Focus: You'll see various aspects to this app, we don't expect you to build a perfect app - please focus on the areas where you are most profiecient. The goal is to exhibit your talents as an engineer.
-- Communicate: Err on the side of oversharing - we want to learn how you think, what you would have done given more time, things you tried that maybe didn't work etc. This is all great to know and will absolutely be counted positivley!
-
-Evaluation Criteria:
-
-- We'll be evaluating folks based on code quality, innovation and communication. We made this an open exercise in an effort to learn more about where you shine. Again feel free to skip sections that you are not familiar with if it means you can show your skill elsewhere in the given time. 
-
-Some hints: 
-
-You'll need to use an OCR solution to pull out the text values. We're using AWS Textract to do this, feel free to use that or any solution of your choosing. 
-
-Given the limited context window of models, you'll likely need to run the text through an embedding to create a vector representation of the documents. We're using MongDB atlas search (https://www.mongodb.com/developer/products/atlas/rag-with-polm-stack-llamaindex-openai-mongodb/). 
-
-Feel free to use any model(s) you want
-
-Submission Guidelines: 
-
-- Fork this repository to your GitHub account.
-- Clone your fork and create a new branch for your submission.
-- Develop your solution on your branch.
-- Push your branch to your fork and create a pull request to the main repository when you're ready.
-- In addition to your code, please submit
-  1) a screenshare walk through of you using the tool to answer some of the queries
-  2) A README file describing how we can test your code
-  3) The answers to the provided queries below (screenshot is fine)
-- 
