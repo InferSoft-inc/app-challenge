@@ -27,7 +27,11 @@ We've included a collection of scanned recipts. Your task is to create an applic
 - **Vector Database**: Mongo, Faiss, Annoy, or similar for efficient similarity search in high-dimensional spaces.
 
 ### Deliverables
-- Source code hosted on a public GitHub repository.
+- Code hosted on a private GitHub repository.
+  - Fork this repository to your GitHub account.
+  - Clone your fork and create a new branch for your submission.
+  - Develop your solution on your branch.
+  - Push your branch to your fork and create a pull request to the main repository when you're ready.
 - A README file documenting:
   - How to set up and run your application.
   - A brief explanation of your design choices and technologies used.
