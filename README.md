@@ -1,10 +1,10 @@
 ## Technical Challenge: LLM Recipt Analysis App
 
 ### Overview
-Welcome to the technical challenge for engineering positions at InferSoft. We're excited about your interest in helping us develop cutting-edge document analysis solutions using large language models (LLMs) and vector databases. The purpose of this challenge is to assess your skills in building a basic version of the application we are developing.
+Welcome to the technical challenge for engineering positions at InferSoft. We're excited about your interest in helping us develop cutting-edge document analysis solutions using LLMs and vector databases. The purpose of this challenge is to assess your skills in building a basic version of the application we are developing.
 
 ### Challenge Description
-Your task is to create a small application where a user can upload multiple text documents, and then query these documents to retrieve relevant information based on their questions. The application should leverage a LLM for understanding and answering questions and a vector database to store and retrieve document embeddings efficiently.
+Your task is to create a small application where a user can upload multiple text documents, and then query these documents to retrieve relevant information based on their questions. The application should leverage an LLM for understanding and answering questions and a vector database to store and retrieve document embeddings efficiently.
 
 We've included a collection of scanned recipts. Your task is to create an application where users can upload the recipts and then retrieve relevent information based on a series of users query prompts included below:
 
