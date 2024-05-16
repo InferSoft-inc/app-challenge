@@ -48,7 +48,4 @@ We've included a collection of scanned recipts. Your task is to create an applic
 - **Design and Architecture**: Thoughtful organization of code and use of appropriate design patterns.
 - **Performance**: Efficiency of the queries and responsiveness of the system.
 
-### Time Frame
-You should aim to complete this challenge within 3-4 hours. This is intended to be a proof of concept that demonstrates your skills and approach to problem-solving in a condensed timeframe.
-
-We will review your submission and get back to you soon!
+This is intended to be a proof of concept that demonstrates your skills and approach to problem-solving in a condensed timeframe. We will review your submission and get back to you soon!
