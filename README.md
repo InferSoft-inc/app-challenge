@@ -73,6 +73,7 @@ To access the MySQL database, use the following credentials:
 
 ## Project Structure
 
+```sh
 .
 ├── backend
 │ ├── Dockerfile
@@ -84,6 +85,7 @@ To access the MySQL database, use the following credentials:
 │ ├── ...
 ├── docker-compose.yml
 └── README.md
+```
 
 - **backend:** Contains the FastAPI backend code.
 - **frontend:** Contains the webapp Next.js frontend code.
