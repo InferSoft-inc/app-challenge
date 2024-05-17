@@ -90,6 +90,23 @@ To access the MySQL database, use the following credentials:
 - **docker-compose.yml:** Docker Compose configuration file.
 - **README.md:** Project documentation.
 
+## Tech Stack Choices
+
+1. Frontend: I chose Next.js' App Router because it is the newest web framework. Vercel is great. Lots of tutorials. App Router is new but I am familiar. 
+2. Backend: It was a 50/50 toss up between Flask and Fast API. Both are written in Python and are relatively easy to learn.
+3. Vector DB: FAISS. Extremely easy to get up and running.
+4. Relational Database: I chose mysql because I am familiar with it and it's running for my other applications. 
+5. LLMs: I used GPT4o whenever I needed the best results somewhat quickly. I could have used Opus but latency becomes an issue. I used Llama3 with Groq to form the final responses because GPT4o would be overkill and we want results fast.
+6. Reranking: Reranking with Cohere improves results quite a bit. 
+
+## Challenges
+
+1. RAG out of the box gave extremely poor results. I experimented with a few designs but quickly realized I was better of using LLMs to convert those documents to a structured format to query off of.
+2. MongoDB was being quite difficult. So I switched to FAISS to save time. ChromaDB, Pinecone, LanceDB and QDrant are all better than FAISS. But I wanted to ship a prototype.
+3. CORs. Easy fix. But always something to add. 
+4. Textract is very expensive. So for testing I made dummy PDFs and used PyMUPDF. 
+5. Time and money were the biggest. You can build a pretty robust system for this with enough time and money to test.
+
 ## Engineering Considerations/Improvements
 
 1. Push the uploaded files to a S3 bucket. You'd do so for permanence and so that AWS Textract could read and process multi page files.
@@ -102,6 +119,10 @@ To access the MySQL database, use the following credentials:
 8. I'd look to probably improve the latency. While file upload speed doesn't matter. Question answering does. So I'd explore more options.
 9. Improve prompts, they are very much in prototype format. They are critical to the app's success.
 10. Add more error handling and logging.
+11. I'd add more chat history features. Probably not necessary but would make for a better UX.
+12. I'd make the code more professional, modular and make main.py in my backend a lot shorter. I'd break steps out into functions.
+13. Would love to integrate LangSmith or any testing framework.
+14. Overall there is a lot of prototype -> production changes.
 
 ## License
 
