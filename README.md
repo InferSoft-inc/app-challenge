@@ -4,6 +4,8 @@
 
 This project is a full stack application for receipt analysis using LangChain, OpenAI, Llama 3, Groq and Amazon Textract. The Fast API backend integrates with a MySQL database to store invoice data and provides endpoints for file upload, document querying, and SQL query execution. The frontend is written in Next.js' App Router in Typescript and Tailwind. The project is containerized using Docker and can be easily set up with Docker Compose.
 
+Demo Video: https://drive.google.com/file/d/1H1KTrHHOfBsiYBRVuAjOk8txNdOzK5oq/view?usp=sharing
+
 ## Features
 
 - **FastAPI Endpoints:** Provides endpoints for file upload, document querying, and SQL query execution.
