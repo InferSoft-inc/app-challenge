@@ -41,9 +41,7 @@ AWS_ACCESS_KEY_ID=your_aws_access_key_id
 AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key
 ```
 
-You can get your Cohere key [here](https://dashboard.cohere.com/api-keys)
-You can get your Groq key [here](https://console.groq.com/keys)
-You can get your OpenAI key [here](https://platform.openai.com/api-keys)
+You will need to obtain: [Cohere Key](https://dashboard.cohere.com/api-keys),[Groq Key](https://console.groq.com/keys), and [OpenAI Key](https://platform.openai.com/api-keys)
 
 For the AWS keys you will have to go to AWS IAM console.
 
