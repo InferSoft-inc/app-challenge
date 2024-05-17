@@ -1,51 +1,104 @@
-## Technical Challenge: LLM Recipt Analysis App
+# LLM Receipt Analysis App
 
-### Overview
-Welcome to the technical challenge for engineering positions at InferSoft. We're excited about your interest in helping us develop cutting-edge document analysis solutions using LLMs and vector databases. The purpose of this challenge is to assess your skills in building a basic version of the application we are developing.
+## Overview
 
-### Challenge Description
-Your task is to create a small application where a user can upload multiple text documents, and then query these documents to retrieve relevant information based on their questions. The application should leverage an LLM for understanding and answering questions and a vector database to store and retrieve document embeddings efficiently.
+This project is a full stack application for receipt analysis using LangChain, OpenAI, Llama 3, Groq and Amazon Textract. The Fast API backend integrates with a MySQL database to store invoice data and provides endpoints for file upload, document querying, and SQL query execution. The frontend is written in Next.js' App Router in Typescript and Tailwind. The project is containerized using Docker and can be easily set up with Docker Compose.
 
-We've included a collection of scanned recipts. Your task is to create an application where users can upload the recipts and then retrieve relevent information based on a series of users query prompts included below:
+## Features
 
-1. `List all the vendors and the total amount spent per vendor across all documents`
+- **FastAPI Endpoints:** Provides endpoints for file upload, document querying, and SQL query execution.
+- **Receipt Analysis:** Extracts and summarizes data from uploaded receipts using Amazon Textract, LangChain and LLMs.
+- **MySQL Integration:** Stores extracted invoice data in a MySQL database and a vector store.
+- **Environment Variables:** Secures API keys and database URL using environment variables.
+- **CORS Enabled:** Allows frontend communication with the backend.
 
-2. `Identify all instances where transportation costs exceeded $100 in any single transaction across all countries. Create a table with the document name, date and amount spent`
+## Backend Endpoints
 
-3. `Calculate the total expenditure on dining out during holiday seasons (December-January) for the years 2018 through 2022, including a breakdown by type of cuisine and country.`
+- **GET /:** Welcome message. Ensure the backend is running on http://localhost:8000/
+- **POST /upload:** Upload receipt files for analysis.
+- **GET /query:** Query documents stored in the vector database.
+- **GET /execute_query:** Execute SQL queries against the MySQL database.
 
-4. `Suggest where spending can be reduced without changing the trips itinerary (ie cheaper hotels, restaurants, etc).`
+## Setup and Running
 
-### Objectives
-1. **Document Upload Interface**: Create a basic web interface that allows users to upload and store the documents. 
-2. **Text Processing**: Implement functionality to preprocess the uploaded documents into a suitable format for analysis (e.g., tokenization, removing special characters). This should include OCR for scanned documents.
-3. **Vector Embedding**: Utilize a LLM to generate embeddings for the preprocessed text, and store these embeddings in a vector database.
-4. **Query System**: Develop a simple query interface where users can enter questions and retrieve answers. The system should use the vector database to find the most relevant document embeddings and use the LLM to generate answers based on these documents.
-5. **Display Results**: The system should display the answers to the user’s questions.
+### Prerequisites
 
-### Suggested Technologies (use whatever you want)
-- **Frontend**: HTML/CSS/JavaScript (Optional: React or Angular)
-- **Backend**: Python (Flask or FastAPI), AWS textract for OCR
-- **LLM Integration**: You can use the Hugging Face Transformers library to integrate a pre-trained model like BERT or GPT.
-- **Vector Database**: Mongo, Faiss, Annoy, or similar for efficient similarity search in high-dimensional spaces.
+- Docker
+- Docker Compose
 
-### Deliverables
-- Code hosted on a private GitHub repository.
-  - Fork this repository to your GitHub account.
-  - Clone your fork and create a new branch specifically for your submission.
-  - Push your developed branch to your fork.
-  - Email the link to your private repository and the specific branch to us at [whit@infersoft.com] when you are ready for review. 
-- A README file documenting:
-  - How to set up and run your application.
-  - A brief explanation of your design choices and technologies used.
-  - Any challenges you encountered and how you resolved them.
-- A simple demo video showcasing the functionality of your application answering as many of the queries as you can. If it doesn't work perfectly, include your thoughts on whats going wrong and how you would fix it in the README file.
+### Environment Variables
 
+Create a `.env` file in the root directory with the following variables:
 
-### Evaluation Criteria
-- **Functionality**: The application meets all the basic functional requirements.
-- **Code Quality**: Clean, readable, and well-documented code.
-- **Design and Architecture**: Thoughtful organization of code and use of appropriate design patterns.
-- **Performance**: Efficiency of the queries and responsiveness of the system.
+```sh
+COHERE_API_KEY=your_cohere_api_key
+GROQ_API_KEY=your_groq_api_key
+OPENAI_API_KEY=your_openai_api_key
+DATABASE_URL=mysql+pymysql://myuser:mypassword@db/mydatabase
+AWS_ACCESS_KEY_ID=your_aws_access_key_id
+AWS_SECRET_ACCESS_KEY=your_aws_secret_access_key
+```
 
-This is intended to be a proof of concept that demonstrates your skills and approach to problem-solving in a condensed timeframe. We will review your submission and get back to you soon!
+For the AWS keys you will have to go to AWS IAM console.
+
+### Build and Run with Docker Compose
+
+1. **Build the Docker images:**
+
+    ```sh
+    docker compose build
+    ```
+
+2. **Run the containers:**
+
+    ```sh
+    docker compose up
+    ```
+
+The backend service will be available at `http://localhost:8000`, frontend at `http://localhost:3000` and the MySQL database at `localhost:3306`.
+
+### Accessing the MySQL Database
+
+To access the MySQL database, use the following credentials:
+
+- **Host:** localhost
+- **Port:** 3306
+- **Database:** mydatabase
+- **User:** myuser
+- **Password:** mypassword
+
+## Project Structure
+
+.
+├── backend
+│ ├── Dockerfile
+│ ├── main.py
+│ ├── requirements.txt
+│ └── .env
+├── frontend
+│ ├── Dockerfile
+│ ├── ...
+├── docker-compose.yml
+└── README.md
+
+- **backend:** Contains the FastAPI backend code.
+- **frontend:** Contains the webapp Next.js frontend code.
+- **docker-compose.yml:** Docker Compose configuration file.
+- **README.md:** Project documentation.
+
+## Engineering Considerations/Improvements
+
+1. Push the uploaded files to a S3 bucket. You'd do so for permanence and so that AWS Textract could read and process multi page files.
+2. Build out the modern PDF vs image based PDF. Textract is expensive. Ideally you do pass every file into it unless you have to.
+3. Fine tune the embedding model
+4. Use a more advanced vector store than FAISS. Ideally MongoDB. Ideally so you can leverage relational + vector store.
+5. Use more metadata
+6. Create longer and more complex JSON summaries, update the tables, etc
+7. Wait for GPT5 and future models that can output more consistent results (produce more consistent/deterministic results)
+8. I'd look to probably improve the latency. While file upload speed doesn't matter. Question answering does. So I'd explore more options.
+9. Improve prompts, they are very much in prototype format. They are critical to the app's success.
+10. Add more error handling and logging.
+
+## License
+
+This project is licensed under the MIT License.
