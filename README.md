@@ -39,7 +39,7 @@ We've included a collection of scanned receipts. Your task is to create an appli
 - **Performance**: Efficiency of the queries and responsiveness of the system.
 
 ### Notes
-- **No Time Limit**: There is no strict time limit for this challenge. We understand the full project might take a lot longer than a few hours. You are welcome to provide mock-up designs or placeholder code for parts you couldn’t complete within the timeframe.
+- **No Time Limit**: There is no strict time limit for this challenge. We understand the full project might take a lot longer than a few hours. You are welcome to provide mock-up designs or placeholder code for parts you couldn’t complete.
 - **Example Questions**: The list of queries provided are examples you can pose to the system. Feel free to come up with additional queries to showcase your solution.
 - **Technology Flexibility**: You are free to use any technology stack you are comfortable with. Focus on the product deliverables and demonstrating your problem-solving approach.
 - **Simplicity and Innovation**: A small demo with a subset of the data is sufficient. Consider implementing a basic vector DB lookup with FAISS or hosting the solution locally. It's okay to simplify aspects like using a smaller LLM locally or exploring alternative methods to achieve the desired results.
