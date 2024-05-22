@@ -25,12 +25,16 @@ SECRET_KEY = "django-insecure-jt^+g8rk@kop!@h-!lqr25#o=_+u-*w)@$3+$)_v+oc-tpvs9k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = ["http://localhost:3000"]
+CSRF_COOKIE_SECURE = True
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    "endpoints.apps.EndpointsConfig",
+    "corsheaders",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
