@@ -134,3 +134,8 @@ def search(request):
     val = get_snippet_from_gpt(total_text, prompt)
     # val = "abcd"        
     return JsonResponse({'message': val}, status=200)
+
+
+def getUploadedFiles(request):
+    files = fileData.objects.values('fileName', 'fileLink')
+    return JsonResponse({'files': list(files)})

@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
-import { Button, Input, Form, FormGroup, Label, Card, CardBody, CardTitle, Container, Table } from 'reactstrap';
+import { Button, Table, Input, Form, FormGroup, Label, Card, CardBody, CardTitle, Container, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from './logo.svg';  // Assuming you have the logo imported
+import './App.css';
 
 function App() {
   const [files, setFiles] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState("");
+  const [searchResults, setSearchResults] = useState('');
+  const [modal, setModal] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+
+  const toggleModal = () => {
+    setModal(!modal);
+    if (!modal) {
+      fetchUploadedFiles();
+    }
+  };
 
   const handleFileChange = (e) => {
     setFiles([...e.target.files]);
@@ -19,7 +28,7 @@ function App() {
   const handleUpload = () => {
     const formData = new FormData();
     files.forEach((file, index) => {
-      formData.append(`files`, file);  // Ensure files are appended correctly
+      formData.append(`files`, file);
     });
 
     fetch('http://127.0.0.1:8000/inferSoft/fileUpload', {
@@ -29,7 +38,7 @@ function App() {
       .then(response => response.json())
       .then(data => {
         console.log('Files uploaded successfully:', data);
-        setFiles([])
+        setFiles([]);
       })
       .catch(error => {
         console.error('Error uploading files:', error);
@@ -46,18 +55,31 @@ function App() {
     })
       .then(response => response.json())
       .then(data => {
-        setSearchResults(data.message);  // Assuming data.message is an array of results
+        setSearchResults(data.message);
       })
       .catch(error => {
         console.error('Error during search:', error);
       });
   };
 
+  const fetchUploadedFiles = () => {
+    fetch('http://127.0.0.1:8000/inferSoft/getUploadedFiles', {
+      method: 'GET',
+    })
+      .then(response => response.json())
+      .then(data => {
+        setUploadedFiles(data.files);
+      })
+      .catch(error => {
+        console.error('Error fetching uploaded files:', error);
+      });
+  };
+
   return (
-    <div className="App" style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+    <div className="App">
       <header className="App-header">
-        <Container style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
-          <Card style={{ width: '100%', maxWidth: '400px' }}>
+        <Container className="app-container">
+          <Card className="card-component">
             <CardBody>
               <CardTitle tag="h5">Upload PDFs and Images</CardTitle>
               <Form>
@@ -83,16 +105,17 @@ function App() {
                     <Button color="success" onClick={handleUpload}>Upload Files</Button>
                   </div>
                 )}
+                <br/>
+                <Button color="info" onClick={toggleModal}>View all uploaded files</Button>
               </Form>
             </CardBody>
           </Card>
 
-          <Card style={{ width: '100%', maxWidth: '400px' }}>
+          <Card className="card-component">
             <CardBody>
               <CardTitle tag="h5">Search</CardTitle>
               <Form inline onSubmit={handleSearch}>
                 <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                  <Label for="search" className="mr-sm-2">Search</Label>
                   <Input
                     type="text"
                     name="search"
@@ -102,20 +125,51 @@ function App() {
                     onChange={handleSearchChange}
                   />
                 </FormGroup>
-                <br/>
+                <br />
                 <Button type="submit" color="primary">Search</Button>
               </Form>
             </CardBody>
           </Card>
 
           {searchResults && (
-            <Card style={{ width: '100%', maxWidth: '400px' }}>
+            <Card className="card-component">
               <CardBody>
                 <CardTitle tag="h5">Search Results</CardTitle>
                 <p>{searchResults}</p>
               </CardBody>
             </Card>
           )}
+
+          <Modal isOpen={modal} toggle={toggleModal}>
+            <ModalHeader toggle={toggleModal}>Uploaded Files</ModalHeader>
+            <ModalBody>
+              {uploadedFiles.length > 0 ? (
+                <Table striped>
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>File Name</th>
+                      <th>File Link</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {uploadedFiles.map((file, index) => (
+                      <tr key={index}>
+                        <th scope="row">{index + 1}</th>
+                        <td>{file.fileName}</td>
+                        <td><a href={file.fileLink} target="_blank" rel="noopener noreferrer">View File</a></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </Table>
+              ) : (
+                <p>No files uploaded yet.</p>
+              )}
+            </ModalBody>
+            <ModalFooter>
+              <Button color="secondary" onClick={toggleModal}>Close</Button>
+            </ModalFooter>
+          </Modal>
         </Container>
       </header>
     </div>
