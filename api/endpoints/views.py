@@ -113,7 +113,7 @@ def get_snippet_from_gpt(text, prompt):
                     "content": prompt },
                 {"role": "user", "content": text}
             ],
-            model="gpt-3.5-turbo", 
+            model="gpt-4-turbo", 
         )
 
         val = chat_completion.choices[0].message.content

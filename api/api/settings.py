@@ -127,3 +127,14 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AWS_ACCESS_KEY_ID = "<AWS ACCESS KEY>"
+AWS_SECRET_ACCESS_KEY = "<AWS SECRET KEY>"
+AWS_STORAGE_BUCKET_NAME = "elasticbeanstalk-us-west-2-992382724291"
+AWS_S3_SIGNATURE_NAME = "s3v4"
+AWS_S3_REGION_NAME = "us-west-2"
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+AWS_S3_VERITY = True
+
+OPENAI_KEY = "<OPEN AI KEY>"

@@ -17,5 +17,6 @@
 
 .card-component{
   width: 100%;
+  max-width: 800px;
   box-shadow: 5px 10px #dedede;
 }
