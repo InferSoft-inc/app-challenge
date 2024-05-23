@@ -4,7 +4,6 @@ from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 import pytesseract
 from PIL import Image
-from pdf2image import convert_from_path
 import os
 import fitz
 from .models import fileData
@@ -17,6 +16,7 @@ openai.api_key = settings.OPENAI_KEY
 
 
 def s3_upload(file):
+    # The below function is to upload a file to S3 and return the link to access the file
     if file:
         try:
             file_path = os.path.join(settings.MEDIA_ROOT, file.name)
@@ -51,10 +51,15 @@ def s3_upload(file):
 
 @csrf_exempt
 def fileUpload(request):
+    # The below function is to process all the files that are uploaded by the user
+    # Steps: 
+    #   Reads the files
+    #   Using the fitz module, reads the file content    
+    #   Stores the file in S3 to avoid storing files in the database
+    #   Saves the S3 link, content of the file and name of the file in the database
+
     if request.method == 'POST':
-        print("Request Files:", request.FILES)
         files = request.FILES.getlist('files')
-        print("Files List:", files)
 
         if not files:
             return JsonResponse({'error': 'No files uploaded'}, status=400)
@@ -83,7 +88,6 @@ def fileUpload(request):
                 ocr_results.append({'file_name': file.name, 'text': text})
 
                 fileLink = s3_upload(file)
-                # fileLink = ""
                 default_storage.delete(temp_file_path)
 
                  # Create a new User object and save it to the database
@@ -99,17 +103,17 @@ def fileUpload(request):
 
 
 def get_snippet_from_gpt(text, prompt):
+    # The below function is to perform the search operation on the data from the pdf files using GPT 4 Turbo model
     try:
         client = OpenAI(api_key=openai.api_key,)
 
-        # Create a chat completion using GPT-3.5-turbo
         chat_completion = client.chat.completions.create(
             messages=[
                 {"role": "system",
                     "content": prompt },
                 {"role": "user", "content": text}
             ],
-            model="gpt-3.5-turbo", # Change to 4 later on
+            model="gpt-3.5-turbo", 
         )
 
         val = chat_completion.choices[0].message.content
@@ -121,7 +125,12 @@ def get_snippet_from_gpt(text, prompt):
 
 
 def search(request):
-    print("coming here?")
+    # The below function is to search for the a query that the User provides
+    # Steps: 
+    #   Retrieves all the contents of the all the files 
+    #   Uses GPT 4 Turbo Model to evaluate the prompt based on the contents of the file  
+    #   Returns the final result in the form of a string
+
     prompt = request.GET.get("search_query")
 
     data_list = fileData.objects.values_list('data', flat=True)
@@ -131,11 +140,15 @@ def search(request):
 
 
     # Use gpt to return the result based on the file's contents
-    val = get_snippet_from_gpt(total_text, prompt)
-    # val = "abcd"        
+    val = get_snippet_from_gpt(total_text, prompt)     
     return JsonResponse({'message': val}, status=200)
 
 
 def getUploadedFiles(request):
+    # The below function is to retrieve all the files which have already been uploaded
+    # Steps: 
+    #   Retrieves all the file names and the file links
+    #   Returns this list to the frontend
+
     files = fileData.objects.values('fileName', 'fileLink')
     return JsonResponse({'files': list(files)})
