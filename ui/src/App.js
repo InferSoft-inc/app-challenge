@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Button, Input, Form, FormGroup, Label, Card, CardBody, CardTitle, Container } from 'reactstrap';
+import { Button, Input, Form, FormGroup, Label, Card, CardBody, CardTitle, Container, Table } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from './logo.svg';  // Assuming you have the logo imported
 
 function App() {
   const [files, setFiles] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState("");
 
   const handleFileChange = (e) => {
     setFiles([...e.target.files]);
@@ -18,7 +19,7 @@ function App() {
   const handleUpload = () => {
     const formData = new FormData();
     files.forEach((file, index) => {
-      formData.append(`file${index}`, file);
+      formData.append(`files`, file);  // Ensure files are appended correctly
     });
 
     fetch('http://127.0.0.1:8000/inferSoft/fileUpload', {
@@ -28,6 +29,7 @@ function App() {
       .then(response => response.json())
       .then(data => {
         console.log('Files uploaded successfully:', data);
+        setFiles([])
       })
       .catch(error => {
         console.error('Error uploading files:', error);
@@ -38,13 +40,13 @@ function App() {
     e.preventDefault();
     const url = new URL('http://localhost:8000/inferSoft/search');
     url.searchParams.append('search_query', searchQuery);
-  
+
     fetch(url, {
       method: 'GET',
     })
       .then(response => response.json())
       .then(data => {
-        console.log('Search results:', data);
+        setSearchResults(data.message);  // Assuming data.message is an array of results
       })
       .catch(error => {
         console.error('Error during search:', error);
@@ -100,10 +102,20 @@ function App() {
                     onChange={handleSearchChange}
                   />
                 </FormGroup>
+                <br/>
                 <Button type="submit" color="primary">Search</Button>
               </Form>
             </CardBody>
           </Card>
+
+          {searchResults && (
+            <Card style={{ width: '100%', maxWidth: '400px' }}>
+              <CardBody>
+                <CardTitle tag="h5">Search Results</CardTitle>
+                <p>{searchResults}</p>
+              </CardBody>
+            </Card>
+          )}
         </Container>
       </header>
     </div>

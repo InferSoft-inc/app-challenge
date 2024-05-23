@@ -3,7 +3,8 @@ from django.db import models
 
 # Create your models here.
 
-class User(models.Model):  # Viewed by User
+class fileData(models.Model):  # Viewed by User
     id = models.AutoField(primary_key=True)
-    file = models.TextField()
+    fileName = models.TextField()
+    fileLink = models.TextField(null=True)
     data = models.TextField()
