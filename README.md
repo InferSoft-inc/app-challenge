@@ -3,45 +3,42 @@
 ### Overview
 Welcome to the technical challenge for engineering positions at InferSoft. We're excited about your interest in helping us develop cutting-edge document analysis solutions using LLMs and innovative storage techniques. The purpose of this challenge is to assess your skills in building a basic version of the application we are developing.
 
-### Challenge Description
-Your task is to create a small application where a user can upload multiple text documents and then query these documents to retrieve relevant information based on their questions. The application should leverage an LLM for understanding and answering questions and a suitable storage method to handle document embeddings efficiently.
+### Setting Up
+Git clone the repository and then follow the steps below to setup the application
 
-We've included a collection of scanned receipts. Your task is to create an application where users can upload the receipts and then retrieve relevant information based on a series of example user query prompts included below:
+#### Backend
+1) The Backend code is located in the 'api' folder. So first move into the api folder using `cd api`
+2) This is not a required step, but a recommended one. If you are not doing this, then you can skip to step 4 directly. Create a new virtual environment. This is not a required step, but I would recommend doing this so that the dependencies which you have in your system do not cause issues with the required dependencies. Run the command `python -m venv env` or `python3 -m venv env` to create a new virtual environemnt with the name "env"
+3) Activate the virtual environment by running the command `source env/bin/activate`
+4) Now that the virtual environment is activated, install all the dependencies by running `pip install -r requirements.txt`
+5) Once the dependencies are installed (and the enviroment keys set), you can run the database migration commands. Run `python manage.py makemigrations`, followed by `python manage.py migrate` to migrate the DB changes
+6) Now, you are all set to start the backend server. Start the server by running `python manage.py runserver` 
 
-1. `List all the vendors and the total amount spent per vendor across all documents.`
-2. `Identify all instances where transportation costs exceeded $100 in any single transaction across all countries. Create a table with the document name, date, and amount spent.`
-3. `Calculate the total expenditure on dining out during holiday seasons (December-January) for the years 2018 through 2022, including a breakdown by type of cuisine and country.`
-4. `Suggest where spending can be reduced without changing the trip's itinerary (e.g., cheaper hotels, restaurants, etc.).`
+`Note: Github doesn't allow keys to be pushed to the repositories. So please contact `shreyas2499@gmail.com` to get access to the keys`
 
-### Objectives
-1. **Document Upload Interface**: Create a basic web interface that allows users to upload and store the documents.
-2. **Text Processing**: Implement functionality to preprocess the uploaded documents into a suitable format for analysis. This should include OCR for scanned documents.
-3. **Storage and Retrieval**: Utilize a method to store the preprocessed text, and enable efficient retrieval for query processing.
-4. **Query System**: Develop a simple query interface where users can enter questions and retrieve answers. The system should find the most relevant document embeddings and use the LLM to generate answers based on these documents.
-5. **Display Results**: The system should display the answers to the user’s questions.
+#### Frontend
+1) The Frontend code is located in the 'ui' folder. So first move into the ui folder using `cd ui`
+2) Then to install the dependencies, run the command `npm install`. This will install all the dependencies required
+3) Now, you can start the frontend server by running the command `npm start`
 
-### Deliverables
-- **Code**: Hosted on a private GitHub repository.
-  - Fork this repository to your GitHub account.
-  - Clone your fork and create a new branch specifically for your submission.
-  - Push your developed branch to your fork.
-  - Email the link to your private repository and the specific branch to us at [whit@infersoft.com] when you are ready for review.
-- **README File**:
-  - Instructions on how to set up and run your application.
-  - A brief explanation of your design choices and technologies used.
-  - Any challenges you encountered and how you resolved them.
-- **Demo Video**: A simple demo video showcasing the functionality of your application, answering as many of the example queries as you can. If it doesn't work perfectly, include your thoughts on what’s going wrong and how you would fix it in the README file.
+### Design and Architecture
+1) Backend: Django
+2) Frontend: React with reactstrap
+3) Database: Sqlite3
+4) Storage: AWS S3
+#### Architecture Diagram
+   ![image](https://github.com/shreyas2499/app-challenge/assets/59840906/1cfc3320-6a41-4941-9c37-8bff6f2b7ab4)
+- The user would upload files to the frontend web server. I used Reactjs and reactstrap for the frontend since react gives a lot of customizable packages which can be used for future improvements.
+- I used Django for the backend as it also provides the added support for SQLite3 by default, which is the DB that I have gone ahead with for this project.
+- The files would first be processed using the ocr package. The content extracted, and then the file would be stored in AWS S3. Ideally, we would want to scale this application. And when the application is scaled, storing files in the database can lead to really huge DB sizes which in turn would lead to really high costs. So using a blob store like S3 is the best alternative for this. So I am using S3 to store all the files (Very cheap compared to storing files in DB + Easily scalable).
+- The obtained file link, file contents, file name is stored in the database.
+- Since, the DB is just going store some basic information of the file, I didn't find the need to use a NoSql db like MongoDB or DynamoDB, and went with the Django's default Sqlite3 database as it does the job just fine in this case.
+- Now, for the search and querying section. I have used chatGPT's GPT 4 Turbo Model to perform the querying. I retrieve all the records from the database and pass all the contents along with the searched query and ask the GPT model to return the result to me, which I then show to the user.
 
-### Evaluation Criteria
-- **Functionality**: The application meets all the basic functional requirements.
-- **Code Quality**: Clean, readable, and well-documented code.
-- **Design and Architecture**: Thoughtful organization of code and use of appropriate design patterns.
-- **Performance**: Efficiency of the queries and responsiveness of the system.
 
-### Notes
-- **No Time Limit**: There is no strict time limit for this challenge. We understand the full project might take a lot longer than a few hours. You are welcome to provide mock-up designs or placeholder code for parts you couldn’t complete.
-- **Example Questions**: The list of queries provided are examples you can pose to the system. Feel free to come up with additional queries to showcase your solution.
-- **Technology Flexibility**: You are free to use any technology stack you are comfortable with. Focus on the product deliverables and demonstrating your problem-solving approach.
-- **Simplicity and Innovation**: A small demo with a subset of the data is sufficient. Consider implementing a basic vector DB lookup with FAISS or hosting the solution locally. It's okay to simplify aspects like using a smaller LLM locally or exploring alternative methods to achieve the desired results.
+### Challenges
+- I hadn't worked with OCR packages, so I had to research and experiment a bit on that front.
+- I wasn't able to create the tables dynamically for the prompts. So right now, I am just displaying plain text.
 
-This challenge is intended to be a proof of concept that demonstrates your skills and approach to problem-solving. We look forward to reviewing your submission!
+**Demo Video**:  
+https://github.com/shreyas2499/app-challenge/assets/59840906/2d378d30-f65e-40bd-a161-7d4f7552b301
