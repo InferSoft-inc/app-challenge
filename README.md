@@ -11,7 +11,7 @@ Git clone the repository and then follow the steps below to setup the applicatio
 2) This is not a required step, but a recommended one. If you are not doing this, then you can skip to step 4 directly. Create a new virtual environment. This is not a required step, but I would recommend doing this so that the dependencies which you have in your system do not cause issues with the required dependencies. Run the command `python -m venv env` or `python3 -m venv env` to create a new virtual environemnt with the name "env"
 3) Activate the virtual environment by running the command `source env/bin/activate`
 4) Now that the virtual environment is activated, install all the dependencies by running `pip install -r requirements.txt`
-5) Once the dependencies are installed (and the enviroment keys set), you can run the database migration commands. Run `python manage.py makemigrations`, followed by `python manage.py migrate` to migrate the DB changes
+5) Once the dependencies are installed (and the enviroment keys set in `settings.py`), you can run the database migration commands. Run `python manage.py makemigrations`, followed by `python manage.py migrate` to migrate the DB changes
 6) Now, you are all set to start the backend server. Start the server by running `python manage.py runserver` 
 
 `Note: Github doesn't allow keys to be pushed to the repositories. So please contact `shreyas2499@gmail.com` to get access to the keys`
