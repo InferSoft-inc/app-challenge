@@ -1,0 +1,22 @@
+.App {
+  text-align: center;
+  height: 100vh; 
+  width: 90vw;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+}
+
+.app-container{
+  width: 150%;
+  display: flex; 
+  flex-direction: column;
+  align-items: center; 
+  gap: 20px;
+}
+
+.card-component{
+  width: 100%;
+  max-width: 800px;
+  box-shadow: 5px 10px #dedede;
+}
