@@ -26,7 +26,7 @@ We've included a collection of scanned receipts. Your task is to create an appli
   - Clone your fork and create a new branch specifically for your submission.
   - Push your developed branch to your fork.
   - Email the link to your private repository and the specific branch to us at [whit@infersoft.com] when you are ready for review.
-  - ***Note**: InferSoft is committed to respecting your intellectual property. If you have concerns around sharing your code, feel free just to submit the demo video of your solution. We're happy to walk through your code over screen share to better understand the products inner workings in a setting you are more comforatable with!
+  - **Note**: InferSoft is committed to respecting your intellectual property. If you have concerns around sharing your code, feel free just to submit the demo video of your solution. We're happy to walk through your code over screen share to better understand the products inner workings in a setting you are more comforatable with!
 - **README File**:
   - Instructions on how to set up and run your application.
   - A brief explanation of your design choices and technologies used.
